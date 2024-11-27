@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ko"
+    xmlns:th="http://thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>CHACHA PROJECT :)</title>
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/container.css}">
+</head>
+<body>
+    <div th:replace="~{fragments/header :: header}"></div>
+    <div layout:fragment="content" style="min-height: 720px;"></div>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>
