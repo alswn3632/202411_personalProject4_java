@@ -22,7 +22,7 @@ public class FileHandler {
     public TempFileDTO uploadFile (MultipartFile file){
         // 업로드 날짜의 폴더 생성
         LocalDate date = LocalDate.now();
-        String today = date.toString().replace("-", File.separator);
+        String today = date.toString().replace("-", "/");
 
         File folders = new File(UP_DIR, today);
 
@@ -42,7 +42,7 @@ public class FileHandler {
         // fileName
         // 일반적으로 file.name이 경로를 포함하는 경우가 많다. 경로가 붙은 파일 이름의 끝 \\ 찾아서 그 뒤의 이름을 사용
         String originalFileName = file.getOriginalFilename();
-        String onlyFileName = originalFileName.substring((originalFileName.lastIndexOf(File.separator)+1));
+        String onlyFileName = originalFileName.substring((originalFileName.lastIndexOf("/")+1));
         tempFileDTO.setFileName(onlyFileName);
 
         // uuid

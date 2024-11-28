@@ -18,5 +18,6 @@ public class NoticeDTO {
     private String content;
     private Long userId;
     private LocalDateTime regAt, modAt;
+    private String isDel;
 
 }

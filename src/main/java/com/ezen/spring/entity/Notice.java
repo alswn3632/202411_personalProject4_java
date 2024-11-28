@@ -23,10 +23,22 @@ public class Notice extends TimeBase{
     @Column(length = 200, nullable = false)
     private String writer;
 
-    @Column(length = 2000, nullable = false)
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
     @Column(nullable = false)
     private Long userId;
+
+    @Column(name = "is_del", columnDefinition = "VARCHAR(1) DEFAULT 'N'")
+    private String isDel;
+
+    @PrePersist  // 엔티티가 처음 저장될 때
+    @PreUpdate   // 엔티티가 업데이트될 때
+    public void setDefaultIsDel() {
+        // isDel이 null인 경우에만 'N'으로 설정
+        if (this.isDel == null) {
+            this.isDel = "N";
+        }
+    }
 
 }

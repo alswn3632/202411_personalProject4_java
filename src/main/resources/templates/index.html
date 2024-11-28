@@ -4,8 +4,11 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/layout}">
 
+<head>
+  <link rel="stylesheet" th:href="@{/css/container.css}">
+  <script type="text/javascript" th:src="@{/js/indexBanner.js}"></script>
+</head>
+
 <div layout:fragment="content" class="container">
-  <h3>Main Index Page!!</h3>
-  <hr>
-  <img alt="" src="/image/sample.jpg" style="width: 1280px; heighy: auto;">
+
 </div>

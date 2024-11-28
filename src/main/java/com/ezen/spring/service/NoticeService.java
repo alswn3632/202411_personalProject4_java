@@ -8,6 +8,8 @@ import com.ezen.spring.entity.File;
 import com.ezen.spring.entity.Notice;
 import com.ezen.spring.entity.TempFile;
 
+import java.util.List;
+
 public interface NoticeService {
 
     default Notice convertDtoToEntity(NoticeDTO noticeDTO){
@@ -17,6 +19,7 @@ public interface NoticeService {
                 .writer(noticeDTO.getWriter())
                 .content(noticeDTO.getContent())
                 .userId(noticeDTO.getUserId())
+                .isDel(noticeDTO.getIsDel())
                 .build();
     }
 
@@ -27,6 +30,7 @@ public interface NoticeService {
                 .writer(notice.getWriter())
                 .content(notice.getContent())
                 .userId(notice.getUserId())
+                .isDel(notice.getIsDel())
                 .regAt(notice.getRegAt())
                 .modAt(notice.getModAt())
                 .build();
@@ -90,4 +94,13 @@ public interface NoticeService {
 
     int tempSave(TempFileDTO tempFileDTO);
 
+    List<NoticeDTO> read();
+
+    NoticeDTO getDetail(Long noticeId);
+
+    int deleteFile(String uuid);
+
+    Long update(NoticeFileDTO noticeFileDTO);
+
+    Long delete(Long noticeId);
 }

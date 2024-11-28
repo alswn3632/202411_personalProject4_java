@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# Froala 에디터 관련 파일을 제외
+/resources/static/froala-editor/

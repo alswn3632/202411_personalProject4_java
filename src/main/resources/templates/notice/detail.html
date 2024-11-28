@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+
+<div layout:fragment="content" class="container">
+  <h3>Notice Detail Page!!</h3>
+  <hr>
+
+  <table>
+    <tr>
+      <td>제목</td>
+      <td>[[${noticeDTO.title}]]</td>
+    </tr>
+    <tr>
+      <td>작성자</td>
+      <td>[[${noticeDTO.writer}]]</td>
+    </tr>
+    <tr>
+      <td>작성일</td>
+      <td>[[${noticeDTO.regAt}]]</td>
+    </tr>
+    <tr colspan="2">
+      <td th:utext="${noticeDTO.content}"></td>
+    </tr>
+  </table>
+  <a th:href="@{/notice/modify(noticeId = ${noticeDTO.noticeId})}"><button>수정</button></a>
+  <a th:href="@{/notice/delete(noticeId = ${noticeDTO.noticeId})}"><button>삭제</button></a>
+
+</div>

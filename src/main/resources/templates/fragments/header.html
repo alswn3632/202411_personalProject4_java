@@ -2,11 +2,20 @@
 <html lang="en"
     xmlns:th="http://www.thymeleaf.org">
 
-<div th:fragment="header" class="header">
-    <nav>
-        <a th:href="@{/}">HOME</a>
-        <a th:href="@{/notice/register}">NOTICE</a>
-        <a href="#">제품</a>
-        <a href="#">연락처</a>
-    </nav>
+<div th:fragment="header" class="sticky-header">
+    <div class="header-left">
+        <a href="#" class="logo">로고</a>
+        <nav class="product-menu">
+            <a href="#">상품</a>
+            <a href="#">카테고리</a>
+            <a href="#">이벤트</a>
+        </nav>
+    </div>
+    <div class="header-right">
+        <nav class="user-menu">
+            <a href="#">로그인</a>
+            <a href="#">마이페이지</a>
+            <a href="#">장바구니</a>
+        </nav>
+    </div>
 </div>

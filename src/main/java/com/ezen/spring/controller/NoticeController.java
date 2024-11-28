@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -49,6 +50,7 @@ public class NoticeController {
 
         if(isOk > 0){
             Map<String, String> response = new HashMap<>();
+            //D:\_myproject\_java\_fileUpload\2024\11\28
             String path = "/upload/" + tempFileDTO.getSaveDir() + "/" + tempFileDTO.getUuid() + "_" + tempFileDTO.getFileName();
 
             response.put("link", path);
@@ -56,6 +58,58 @@ public class NoticeController {
         }
 
         return null;
+    }
+
+    @GetMapping("/list")
+    public String list(Model model){
+        List<NoticeDTO> list = noticeService.read();
+        log.info(">>>> list > {}", list);
+        model.addAttribute("list", list);
+
+        return "/notice/list";
+    }
+
+    @GetMapping("/detail")
+    public String detail(@RequestParam("noticeId") Long noticeId ,Model model){
+        NoticeDTO noticeDTO = noticeService.getDetail(noticeId);
+        model.addAttribute("noticeDTO", noticeDTO);
+
+        return "/notice/detail";
+    }
+
+    @GetMapping("/modify")
+    public String modify(@RequestParam("noticeId") Long noticeId ,Model model){
+        NoticeDTO noticeDTO = noticeService.getDetail(noticeId);
+        model.addAttribute("noticeDTO", noticeDTO);
+
+        return "/notice/modify";
+    }
+
+    @ResponseBody
+    @PostMapping("/modify")
+    public String modify(@RequestBody NoticeDTO noticeDTO){
+        log.info(">>>> update noticeDTO > {}", noticeDTO);
+        List<String> uuidArr = fileHandler.extractUuids(noticeDTO.getContent());
+        NoticeFileDTO noticeFileDTO = new NoticeFileDTO(noticeDTO, uuidArr);
+
+        Long num = noticeService.update(noticeFileDTO);
+
+        return num != null? "1" : "0";
+    }
+
+    @ResponseBody
+    @GetMapping(value = "/deleteFile/{uuid}")
+    public String deleteFile(@PathVariable("uuid") String uuid){
+        log.info(">>>> uuid > {}", uuid);
+        int isOk = noticeService.deleteFile(uuid);
+        log.info(">>>> deleteFile is {}", (isOk>0? "성공" : "실패"));
+        return isOk>0? "1" : "0";
+    }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam("noticeId") Long noticeId){
+        Long num = noticeService.delete(noticeId);
+        return "redirect:/notice/list";
     }
 
 
