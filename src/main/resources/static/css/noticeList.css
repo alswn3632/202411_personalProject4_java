@@ -1,0 +1,148 @@
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto; /* 화면 중앙에 배치 */
+  padding-top: 50px;
+}
+
+.top {
+  text-align: center; /* 텍스트를 수평 중앙 정렬 */
+}
+
+.miniTitle {
+  font-size: 24px; /* 적절한 폰트 크기 설정 */
+  font-weight: bold;
+  margin: 0; /* 불필요한 마진 제거 */
+}
+
+/* 검색창을 오른쪽에 붙이기 */
+.search {
+    display: flex;
+    justify-content: flex-end; /* 오른쪽 정렬 */
+    margin-top: 10px;
+    margin-right: 20px
+}
+
+/* select 스타일 */
+select {
+    width: 100px;
+    height: 40px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    background-color: #fff;
+}
+
+/* 검색어 입력창 */
+input[type="search"] {
+    height: 40px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    width: 250px; /* 너비 설정 */
+}
+
+.search .searchBtn{
+    height: 40px;
+    padding: 8px;
+    background-color: #383838;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.mid {
+  padding-top: 24px;
+  width: 100%;
+  max-width: 1280px; /* 고정된 너비 1280px */
+  margin: 0 auto; /* 중앙 정렬 */
+}
+
+table .col{
+  text-align: center;
+}
+
+table .col1{
+    width: 70px;
+}
+
+table .col3, .col4{
+    width: 120px;
+}
+
+.bot {
+    padding: 20px;
+    width: 100%;
+    max-width: 1280px; /* 고정된 너비 1280px */
+    margin: 0 auto; /* 중앙 정렬 */
+    display: flex;
+    flex-direction: column; /* 세로 정렬 */
+    align-items: center; /* 페이지네이션과 버튼을 가운데로 배치 */
+}
+
+.paging {
+  display: flex;
+  justify-content: center; /* 페이지네이션을 가로로 중앙 정렬 */
+  width: 100%; /* 페이지네이션을 전체 가로폭에 맞게 확장 */
+  margin-bottom: 20px; /* 아래쪽 여백을 주어 글쓰기 버튼과 분리 */
+}
+
+.paging ul {
+  list-style: none; /* 기본적인 목록 스타일 제거 */
+  padding: 0; /* 기본 패딩 제거 */
+  margin: 0; /* 기본 마진 제거 */
+  display: flex; /* 리스트 항목을 가로로 나열 */
+}
+
+.paging a {
+  color: #6c757d;
+  text-decoration: none;
+  padding: 6px 12px;
+  display: inline-block;
+  text-align: center;
+}
+
+.paging a:hover {
+  background-color: #f8f9fa;
+}
+
+.paging a.disabled {
+  color: #ddd;
+  cursor: not-allowed;
+  pointer-events: none;  /* 클릭 비활성화 */
+}
+
+.paging a.selected {
+  background-color: #6c757d;
+  color: white;
+}
+
+.paging .page-item {
+  display: flex;
+  align-items: center;
+}
+
+.paging .page-item.disabled .page-link {
+  color: #ddd;
+  cursor: not-allowed;
+}
+
+/* 글쓰기 버튼 */
+.right {
+  display: flex;
+  justify-content: flex-end; /* 오른쪽 끝으로 정렬 */
+  width: 100%; /* 오른쪽 정렬을 위해 전체 폭을 사용 */
+  margin-top: 5px; /* 페이지네이션과 글쓰기 버튼 사이에 여백 추가 */
+}
+
+.right button {
+  padding: 10px 15px;
+  background-color: #383838;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.right button:hover {
+  background-color: #212121;
+}

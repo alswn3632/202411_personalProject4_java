@@ -17,6 +17,9 @@ var noticeBox = new FroalaEditor('#noticeBox', {
     }
   },
 
+  height: 450,   // 높이 설정 (px 단위)
+  width: 1280, // 너비 설정 (백분율로 설정 가능)
+
   // 이미지 업로드 처리
   imageUploadURL: '/notice/upload',
   imageUploadMethod: 'POST',

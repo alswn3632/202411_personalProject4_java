@@ -4,28 +4,40 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/layout}">
 
+<head>
+  <link rel="stylesheet" th:href="@{/css/noticeDetail.css}">
+</head>
+
 <div layout:fragment="content" class="container">
-  <h3>Notice Detail Page!!</h3>
-  <hr>
+  <div class="top">
+    <p class="miniTitle">공지사항</p>
+  </div>
 
-  <table>
-    <tr>
-      <td>제목</td>
-      <td>[[${noticeDTO.title}]]</td>
-    </tr>
-    <tr>
-      <td>작성자</td>
-      <td>[[${noticeDTO.writer}]]</td>
-    </tr>
-    <tr>
-      <td>작성일</td>
-      <td>[[${noticeDTO.regAt}]]</td>
-    </tr>
-    <tr colspan="2">
-      <td th:utext="${noticeDTO.content}"></td>
-    </tr>
-  </table>
-  <a th:href="@{/notice/modify(noticeId = ${noticeDTO.noticeId})}"><button>수정</button></a>
-  <a th:href="@{/notice/delete(noticeId = ${noticeDTO.noticeId})}"><button>삭제</button></a>
+  <div class="mid">
+    <table>
+      <tr>
+        <td class="head">제목</td>
+        <td><input type="text" name="title" id="title" th:value="${noticeDTO.title}" readonly></td>
+      </tr>
+      <tr>
+        <td class="head">작성자</td>
+        <td>
+          <input type="text" id="writer" th:value="${noticeDTO.writer}" readonly>
+        </td>
+      </tr>
+      <tr>
+        <td class="head">작성일</td>
+        <td>
+          <input type="text" id="regAt" th:value="${noticeDTO.regAt}" readonly>
+        </td>
+      </tr>
+    </table>
 
+    <div id="noticeBox" class="froalaBox" th:utext="${noticeDTO.content}"></div>
+
+    <div class="btnbox">
+      <a th:href="@{/notice/modify(noticeId = ${noticeDTO.noticeId})}"><button class="btn">수정</button></a>
+      <a th:href="@{/notice/delete(noticeId = ${noticeDTO.noticeId})}"><button class="btn">삭제</button></a>
+    </div>
+  </div>
 </div>

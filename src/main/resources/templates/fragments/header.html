@@ -4,18 +4,19 @@
 
 <div th:fragment="header" class="sticky-header">
     <div class="header-left">
-        <a href="#" class="logo">로고</a>
+        <a th:href="@{/}" class="logo">HOME</a>
         <nav class="product-menu">
-            <a href="#">상품</a>
-            <a href="#">카테고리</a>
-            <a href="#">이벤트</a>
+            <a href="#">BEST</a>
+            <a href="#">PRODUCT</a>
+            <a href="#">EVENT</a>
         </nav>
     </div>
     <div class="header-right">
         <nav class="user-menu">
-            <a href="#">로그인</a>
-            <a href="#">마이페이지</a>
-            <a href="#">장바구니</a>
+            <a href="#">LOGIN</a>
+            <a href="#">MYPAGE</a>
+            <a th:href="@{/notice/list}">NOTICE</a>
+            <a href="#">Q&A</a>
         </nav>
     </div>
 </div>

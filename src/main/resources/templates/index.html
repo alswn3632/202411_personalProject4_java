@@ -5,10 +5,20 @@
       layout:decorate="~{layout/layout}">
 
 <head>
-  <link rel="stylesheet" th:href="@{/css/container.css}">
-  <script type="text/javascript" th:src="@{/js/indexBanner.js}"></script>
+  <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        margin-top: 60px; /* 스티키 헤더가 콘텐츠를 덮지 않도록 여백 추가 */
+      }
+  </style>
 </head>
 
 <div layout:fragment="content" class="container">
-
+  <img th:src="@{/image/banner5.jpg}" style="width: 1920px; height: auto; margin: 0 auto;">
 </div>

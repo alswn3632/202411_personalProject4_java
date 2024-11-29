@@ -7,6 +7,7 @@ import com.ezen.spring.dto.TempFileDTO;
 import com.ezen.spring.entity.File;
 import com.ezen.spring.entity.Notice;
 import com.ezen.spring.entity.TempFile;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -94,7 +95,7 @@ public interface NoticeService {
 
     int tempSave(TempFileDTO tempFileDTO);
 
-    List<NoticeDTO> read();
+    Page<NoticeDTO> read(int pageNo, String type, String keyword);
 
     NoticeDTO getDetail(Long noticeId);
 

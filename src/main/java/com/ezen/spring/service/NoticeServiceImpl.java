@@ -11,6 +11,10 @@ import com.ezen.spring.repository.NoticeRepository;
 import com.ezen.spring.repository.TempFileRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,15 +59,12 @@ public class NoticeServiceImpl implements NoticeService{
     }
 
     @Override
-    public List<NoticeDTO> read() {
-        // 목록 데이터 가져오기
-        List<Notice> noticeList = noticeRepository.getList();
-        List<NoticeDTO> noticeDTOList = new ArrayList<>();
-        for (Notice notice : noticeList) {
-            notice.setContent(null);
-            noticeDTOList.add(convertEntityToDto(notice));
-        }
-        return noticeDTOList;
+    public Page<NoticeDTO> read(int pageNo, String type, String keyword) {
+        Pageable pageable = PageRequest.of(pageNo, 10, Sort.by("noticeId").descending());
+        Page<Notice> list = noticeRepository.searchBoards(type, keyword, pageable);
+
+        Page<NoticeDTO> dtoList = list.map(b -> convertEntityToDto(b));
+        return dtoList;
     }
 
     @Override

@@ -4,30 +4,92 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/layout}">
 
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <link rel="stylesheet" th:href="@{/css/main.css}">
+  <link rel="stylesheet" th:href="@{/css/noticeList.css}">
+</head>
+
 <div layout:fragment="content" class="container">
-  <h3>Notice List Page!!</h3>
-  <hr>
+  <div class="top">
+    <p class="miniTitle">공지사항</p>
 
-  <!--/* 리스트 */-->
-  <table class="table table-hover">
-    <thead>
-    <tr>
-      <th scope="col">번호</th>
-      <th scope="col">제목</th>
-      <th scope="col">작성자</th>
-      <th scope="col">작성일</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="noticeDTO:${list}">
-      <td>[[${noticeDTO.noticeId }]]</td>
-      <td><a th:href="@{/notice/detail(noticeId=${noticeDTO.noticeId})}" style="text-decoration: none; font-weight: bold; color: inherit;">
-        [[${noticeDTO.title }]]
-      </a></td>
-      <td>[[${noticeDTO.writer }]]</td>
-      <td>[[${noticeDTO.regAt }]]</td>
-    </tr>
-    </tbody>
-  </table>
+    <div class="search">
+      <form action="/notice/list" method="get" role="search">
+        <select name="type" id="inputGroupSelect01">
+          <option value="twc" th:selected="${pgvo.type == 'twc'? true : false }">전체</option>
+          <option value="t" th:selected="${pgvo.type == 't'? true : false }">제목</option>
+          <option value="w" th:selected="${pgvo.type == 'w'? true : false }">작성자</option>
+          <option value="c" th:selected="${pgvo.type == 'c'? true : false }">내용</option>
+        </select>
+        <input type="search" name="keyword" th:value="${pgvo.keyword}" aria-label="Search">
+        <input type="hidden" name="pageNo" th:value="0">
+        <button type="submit" class="searchBtn">검색</button>
+      </form>
+    </div>
+  </div>
 
+  <div class="mid">
+    <!--/* 리스트 */-->
+    <table class="table table-hover">
+      <!--/* 제목 */-->
+      <thead>
+      <tr>
+        <th scope="col" class="col col1">번호</th>
+        <th scope="col" class="col2">제목</th>
+        <th scope="col" class="col col3">작성자</th>
+        <th scope="col" class="col col4">작성일</th>
+      </tr>
+      </thead>
+      <!--/* 본문 */-->
+      <tbody>
+      <tr th:each="noticeDTO:${list}">
+        <td class="col">공지</td>
+        <td><a th:href="@{/notice/detail(noticeId=${noticeDTO.noticeId})}" style="text-decoration: none; font-weight: bold; color: inherit;">
+          [[${noticeDTO.title }]]
+        </a></td>
+        <td class="col">[[${noticeDTO.writer }]]</td>
+        <td class="col">[[${#temporals.format(noticeDTO.regAt, 'MM-dd')}]]</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div class="bot">
+      <div class="paging">
+        <nav aria-label="Page navigation example">
+          <ul>
+            <!-- 이전 -->
+            <li>
+              <a th:classappend="${pgvo.hasPrev? '' : 'disabled'}"
+                 th:href="@{/notice/list(pageNo=${pgvo.startPage-2}, type=${pgvo.type}, keyword=${pgvo.keyword})}"
+                 style="color:#6c757d;" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <!-- 번호 -->
+            <th:block>
+              <li th:each="i : ${#numbers.sequence(pgvo.startPage, pgvo.endPage)}">
+                <a th:href="@{/notice/list(pageNo=${i-1}, type=${pgvo.type}, keyword=${pgvo.keyword})}"
+                   th:style="${pgvo.pageNo eq i? 'background-color: #6c757d; color:white;' : 'color:#6c757d;'}">[[${i}]]</a>
+              </li>
+            </th:block>
+            <!-- 다음 -->
+            <li>
+              <a th:classappend="${pgvo.hasNext? '' : 'disabled'}"
+                 th:href="@{/notice/list(pageNo=${pgvo.endPage}, type=${pgvo.type}, keyword=${pgvo.keyword})}"
+                 style="color:#6c757d;" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="right">
+        <a th:href="@{/notice/register}"><button>글쓰기</button></a>
+      </div>
+    </div>
+
+  </div>
 </div>

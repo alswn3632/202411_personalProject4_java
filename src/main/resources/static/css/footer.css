@@ -1,0 +1,40 @@
+/* Footer 스타일 */
+footer {
+    color: #333; /* 텍스트 색상 */
+}
+
+/* 텍스트 가운데 정렬 */
+footer p {
+    margin: 5px 0; /* 텍스트 간격을 조금 주기 */
+}
+
+/* 중앙 정렬, 여백, padding 추가 */
+.text-center {
+    text-align: center;
+}
+
+.py-3 {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+/* 인스타그램 링크 스타일 */
+footer a {
+    color: #333; /* 링크 색상 설정 */
+    text-decoration: none; /* 링크의 밑줄 제거 */
+}
+
+footer a:hover {
+    text-decoration: underline; /* 링크 hover 시 밑줄 추가 */
+}
+
+/* 모바일 및 작은 화면에서 적절히 반응형으로 작동하도록 설정 */
+@media (max-width: 768px) {
+    footer {
+        padding: 0.5rem; /* 작은 화면에서는 padding을 조금 줄여서 여백을 줄임 */
+    }
+
+    .text-center p {
+        font-size: 0.9rem; /* 작은 화면에서 폰트 크기를 약간 줄임 */
+    }
+}

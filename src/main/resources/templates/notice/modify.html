@@ -13,22 +13,38 @@
   <script type="text/javascript" th:src="@{/node_modules/froala-editor/js/froala_editor.pkgd.min.js}"></script>
   <!-- 한국어 언어 파일 -->
   <script th:src="@{/node_modules/froala-editor/js/languages/ko.js}"></script>
+  <link rel="stylesheet" th:href="@{/css/noticeRegister.css}">
 </head>
 
 <div layout:fragment="content" class="container">
-  <h3>Notice Modify Page!!</h3>
-  <hr>
-  <label for="title" class="form-label">title</label>
-  <input type="text" name="title" id="title" th:value="${noticeDTO.title}">
+  <div class="top">
+    <p class="miniTitle">공지사항</p>
+  </div>
 
-  <label class="form-label">content</label>
-  <div id="noticeBox" th:utext="${noticeDTO.content}"></div>
-
-  <input type="hidden" id="writer" value="관리자">
-  <input type="hidden" id="userId" value="1" >
-  <input type="hidden" id="noticeId" th:value="${noticeDTO.noticeId}" >
-
-  <button id="regBtn">저장</button>
+  <div class="mid">
+    <table>
+      <tr>
+        <td>제목</td>
+        <td><input type="text" name="title" id="title" th:value="${noticeDTO.title}"></td>
+      </tr>
+      <tr>
+        <td>작성자</td>
+        <td>
+          <input type="text" id="writer" value="관리자" readonly>
+          <input type="hidden" id="userId" value="1">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" class="input-c">
+          <div id="noticeBox" th:utext="${noticeDTO.content}"></div>
+        </td>
+      </tr>
+    </table>
+    <div class="btnbox">
+      <input type="hidden" id="noticeId" th:value="${noticeDTO.noticeId}" >
+      <button id="regBtn" class="btn">저장</button>
+    </div>
+  </div>
 
   <script th:src="@{/js/noticeModify.js}"></script>
 </div>

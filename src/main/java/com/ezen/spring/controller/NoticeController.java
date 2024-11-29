@@ -2,12 +2,14 @@ package com.ezen.spring.controller;
 
 import com.ezen.spring.dto.NoticeDTO;
 import com.ezen.spring.dto.NoticeFileDTO;
+import com.ezen.spring.dto.PagingVO;
 import com.ezen.spring.dto.TempFileDTO;
 import com.ezen.spring.handler.FileHandler;
 import com.ezen.spring.service.NoticeService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -61,10 +63,16 @@ public class NoticeController {
     }
 
     @GetMapping("/list")
-    public String list(Model model){
-        List<NoticeDTO> list = noticeService.read();
+    public String list(Model model,
+                       @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
+                       @RequestParam(value = "type", required = false) String type,
+                       @RequestParam(value = "keyword", required = false) String keyword){
+
+        Page<NoticeDTO> list = noticeService.read(pageNo, type, keyword);
+        PagingVO pgvo = new PagingVO(list, type, keyword);
         log.info(">>>> list > {}", list);
         model.addAttribute("list", list);
+        model.addAttribute("pgvo", pgvo);
 
         return "/notice/list";
     }
